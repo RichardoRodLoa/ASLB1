@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Portal de gestión bancaria para clientes y transferencias." />
+    <title>Banco Nova | Gestión de Cuentas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+<main class="app-shell">
+    <header class="topbar">
+        <a class="brand" href="#clientes" aria-label="Banco Nova, inicio">
+            <span class="brand-mark">N</span>
+            <span>Banco <strong>Nova</strong></span>
+        </a>
+        <p class="environment"><span></span> Portal Operativo</p>
+    </header>
+
+    <section class="hero" aria-labelledby="page-title">
+        <div>
+            <p class="eyebrow">Gestión Bancaria</p>
+            <h1 id="page-title">Todo el Movimiento de tus Cuentas</h1>
+            <p class="hero-copy">Consulta clientes, mueve dinero y revisa cada transacción.</p>
+        </div>
+        <div class="hero-detail" aria-hidden="true"><span>01</span><i></i><span>03</span></div>
+    </section>
+
+    <nav class="view-tabs" aria-label="Secciones del portal">
+        <button class="tab is-active" type="button" data-view="clientes">Clientes</button>
+        <button class="tab" type="button" data-view="transferencia">Transferir Dinero</button>
+        <button class="tab" type="button" data-view="historial">Historial</button>
+    </nav>
+
+    <section id="clientes" class="view is-active" aria-labelledby="clientes-title">
+        <div class="section-heading">
+            <div><p class="eyebrow">01 — Directorio</p><h2 id="clientes-title">Clientes Registrados</h2></div>
+            <button id="refresh-customers" class="button button-secondary" type="button">Actualizar Lista</button>
+        </div>
+        <div id="customers-feedback" class="feedback" role="status" aria-live="polite"></div>
+        <div class="table-card">
+            <div class="table-wrap">
+                <table>
+                    <thead><tr><th>Cliente</th><th>N.º de Cuenta</th><th class="align-right">Saldo Disponible</th></tr></thead>
+                    <tbody id="customers-body"><tr><td colspan="3" class="empty-state">Cargando clientes…</td></tr></tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section id="transferencia" class="view" aria-labelledby="transfer-title">
+        <div class="section-heading"><div><p class="eyebrow">02 — Operación</p><h2 id="transfer-title">Realizar Transferencia</h2></div></div>
+        <div class="transfer-layout">
+            <div class="transfer-intro"><span class="transfer-icon">↗</span><h3>Transfiere con confianza.</h3><p>Selecciona las cuentas registradas e indica el valor que deseas enviar.</p></div>
+            <form id="transfer-form" class="transfer-form">
+                <div class="field"><label for="sender-account">Cuenta de Origen</label><select id="sender-account" name="senderAccountNumber" required><option value="">Selecciona una cuenta</option></select></div>
+                <div class="swap-symbol" aria-hidden="true">↓</div>
+                <div class="field"><label for="receiver-account">Cuenta de Destino</label><select id="receiver-account" name="receiverAccountNumber" required><option value="">Selecciona una cuenta</option></select></div>
+                <div class="field amount-field"><label for="amount">Monto a Transferir</label><div class="currency-input"><span>$</span><input id="amount" name="amount" type="number" min="0.01" step="0.01" inputmode="decimal" placeholder="0.00" required /></div></div>
+                <button class="button button-primary" type="submit">Confirmar Transferencia <span>→</span></button>
+                <div id="transfer-feedback" class="feedback" role="status" aria-live="polite"></div>
+            </form>
+        </div>
+    </section>
+
+    <section id="historial" class="view" aria-labelledby="history-title">
+        <div class="section-heading"><div><p class="eyebrow">03 — Trazabilidad</p><h2 id="history-title">Historial de Transacciones</h2></div></div>
+        <div class="history-controls"><div class="field"><label for="history-account">Cliente / Cuenta</label><select id="history-account"><option value="">Selecciona una cuenta</option></select></div><button id="load-history" class="button button-primary" type="button">Ver Historial</button></div>
+        <div id="history-feedback" class="feedback" role="status" aria-live="polite"></div>
+        <div class="table-card"><div class="table-wrap"><table><thead><tr><th>Fecha y Hora</th><th>Tipo</th><th>Cuenta Relacionada</th><th class="align-right">Monto</th></tr></thead><tbody id="history-body"><tr><td colspan="4" class="empty-state">Selecciona una cuenta para ver sus movimientos.</td></tr></tbody></table></div></div>
+    </section>
+</main>
+<script src="/app.js"></script>
+</body>
+</html>
